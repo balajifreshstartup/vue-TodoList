@@ -10,6 +10,7 @@
           value=""
           aria-label="..."
           :checked="todolist.status"
+          @change="updateTodoListStatus(index, $event)"
         />
         <span>{{ todolist.todo }}</span>
       </div>
@@ -21,12 +22,25 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
   export default {
     name: "TodoList",
     props: {
       todolists:Array
     },
-    data() {},
+    methods:{
+      ...mapActions([
+        'changeTodoListStatus'
+      ]),
+      updateTodoListStatus(index){
+        this.changeTodoListStatus({
+          id: index,
+        });
+      }
+    },
+    data() {
+    
+    },
   };
 </script>
 

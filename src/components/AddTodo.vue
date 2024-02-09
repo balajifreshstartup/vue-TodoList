@@ -1,6 +1,6 @@
 <template>
   <h6 class="mb-3">Awesome Todo List</h6>
-  <form class="d-flex justify-content-center align-items-start mb-4">
+  <form class="d-flex justify-content-center align-items-start mb-4" v-on:submit.prevent="addTodo">
     <div class="form-outline flex-fill">
       <input v-model="newTodo" type="text" id="form3" class="form-control form-control-lg" />
       <label class="form-label" for="form3"
@@ -26,7 +26,8 @@ import { mapActions } from 'vuex'
       ...mapActions([
         'addTodoAction'
       ]),
-      addTodo(){
+      addTodo(e){
+        e.preventDefault();
         if(this.newTodo.trim() === '') return
         this.addTodoAction({
           todo: this.newTodo,
